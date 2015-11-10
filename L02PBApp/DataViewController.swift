@@ -10,8 +10,9 @@ import UIKit
 
 class DataViewController: UIViewController {
 
+    @IBOutlet weak var tvContent: UITextView!
     @IBOutlet weak var dataLabel: UILabel!
-    var dataObject: String = ""
+    var dataObject: AnyObject?
 
 
     override func viewDidLoad() {
@@ -26,7 +27,19 @@ class DataViewController: UIViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.dataLabel!.text = dataObject
+        //self.dataLabel!.text = dataObject
+//        if let obj: AnyObject = dataObject {
+//            self.dataLabel!.text = obj.objectForKey("title")
+//        }else{
+//            self.dataLabel!.text = ""
+//        }
+        if let obj: AnyObject = dataObject {
+            self.dataLabel!.text = obj.objectForKey("title") as? String
+            self.tvContent!.text = obj.objectForKey("content") as? String
+        }else{
+            self.dataLabel!.text = ""
+            self.tvContent!.text = ""
+        }
     }
 
 
